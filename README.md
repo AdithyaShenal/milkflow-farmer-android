@@ -8,6 +8,14 @@ The application is a **lightweight mobile solution** designed for farmers partic
 
 The use of a modern React-based mobile stack ensures minimal application size, efficient performance, and easy maintainability.
 
+## System Context
+The Driver Mobile Application is **one component of the larger MilkFlow system**, a comprehensive dairy supply chain management platform.  
+Other major components include:
+- Admin Web Dashboard (React)
+- Main Backend (Node.js)
+- VRP Optimization Service (Spring Boot)
+- Farmer Mobile Application (React + Capacitor)
+
 ## Key Features
 - Farmers can submit their daily production using this application
 - View history of their productions
