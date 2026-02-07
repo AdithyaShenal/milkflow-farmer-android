@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "konsta/react/theme.css";
+/* Typically in your index.css or equivalent */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/* custom style (ignore the error on theme) */
+@theme {
+  --font-momo: "Momo Signature", cursive;
+  --font-quicksand: "Quicksand", sans-serif;
+}
+
+/* Add this to your global CSS to kill the 'dull' tint */
+/* .k-material .k-page {
+  background-color: #f8f9fa !important; /* The official Google 'Snow' background */
+
+.k-color-brand-primary {
+  --k-button-bg-color: #1a73e8;
+  --k-button-text-color: #ffffff;
+}
+
+@theme {
+  /* PRIMARY: Official Google "Royal" Blue. 
+     This is the most trusted color in the Google ecosystem. */
+  --color-brand-primary: #1a73e8;
+
+  --color-brand-blue: #1a73e8;
+
+  /* SECONDARY: "Deep Clay" - Google uses this earthy tone 
+     to balance tech-blue with real-world utility. */
+  --color-brand-earth: #795548;
+
+  /* ERROR: Google's "Critical" Red. Clear and sharp. */
+  --color-brand-red: #d93025;
+
+  /* SUCCESS: A "Minty" Green for success states (Milk verified). */
+  --color-brand-green: #1e8e3e;
+
+  /* ACCENT: Google's "Amber" for warnings or pending status. */
+  --color-brand-yellow: #f9ab00;
+}
+@import "leaflet/dist/leaflet.css";
+
+@layer base {
+  body {
+    /* font-family: "Quicksand", sans-serif; */
+    font-family: "Quicksand", sans-serif;
+  }
+
+  h1 {
+    @apply text-6xl font-bold;
+  }
+
+  h2 {
+    @apply text-5xl font-bold;
+  }
+
+  h3 {
+    @apply text-4xl font-bold;
+  }
+
+  h4 {
+    @apply text-3xl font-bold;
+  }
+
+  h5 {
+    @apply text-2xl font-bold;
+  }
+
+  h6 {
+    @apply text-xl font-bold;
+  }
+}
+
+.container {
+  width: 100%;
+
+  @media (width >= 30rem /* 448px */) {
+    max-width: 26rem /* 448px */;
+  }
+  @media (width >= 40rem /* 640px */) {
+    max-width: 40rem /* 640px */;
+  }
+  @media (width >= 48rem /* 768px */) {
+    max-width: 48rem /* 768px */;
+  }
+  @media (width >= 64rem /* 1024px */) {
+    max-width: 64rem /* 1024px */;
+  }
+  @media (width >= 80rem /* 1280px */) {
+    max-width: 80rem /* 1280px */;
+  }
+  @media (width >= 105rem /* 1280px */) {
+    max-width: 85rem /* 1280px */;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
