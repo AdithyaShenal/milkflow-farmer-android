@@ -1,76 +1,34 @@
-# React + TypeScript + Vite
+# MilkFlow – Farmer Mobile Application
+MilkFlow - An Intelligent Dairy Supply Chain & Route Optimization System with VRP-Based Routing Logistics
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+This repository contains the **Farmer Mobile Application** of the **MilkFlow** system, developed using **React 19**, **Vite**, and **Capacitor**.
 
-Currently, two official plugins are available:
+The application is a **lightweight mobile solution** designed for farmers participating in the dairy supply chain. It enables farmers to view milk collection schedules, manage supply-related information, and stay informed about logistics operations through a fast and responsive mobile interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The use of a modern React-based mobile stack ensures minimal application size, efficient performance, and easy maintainability.
 
-## React Compiler
+## System Context
+The Driver Mobile Application is **one component of the larger MilkFlow system**, a comprehensive dairy supply chain management platform.  
+Other major components include:
+- Admin Web Dashboard (React)
+- Main Backend (Node.js)
+- VRP Optimization Service (Spring Boot)
+- Farmer Mobile Application (React + Capacitor)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Key Features
+- Farmers can submit their daily production using this application
+- View history of their productions
+- View pickup arriving time
+- Report problems to the admin & contact company via app
+- Lightweight and efficient mobile experience
+- Secure communication with backend services
 
-Note: This will impact Vite dev & build performances.
+## Technology Stack
+- React 19
+- Vite
+- Capacitor
+- REST APIs
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# milkflow-farmer-android
+## Academic Context
+This project is developed as **Final Year Project** of the Bachelor of Computer Science (BCS) undergraduate degree program at the University of Ruhuna, Sri Lanka.
