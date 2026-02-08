@@ -1,4 +1,5 @@
-import { Block, DialogButton, List, ListItem } from "konsta/react";
+import { Block, Button } from "konsta/react";
+import { Calendar } from "lucide-react";
 import HistoryCard from "../components/cards/HistoryCard";
 import useFetchProd from "../hooks/useFetchProd";
 import LoadingPage from "./LoadingPage";
@@ -6,90 +7,69 @@ import LoadingPage from "./LoadingPage";
 const HistoryPage = () => {
   const { data: productions, isLoading } = useFetchProd();
 
-  if (isLoading) return <div>{<LoadingPage />}</div>;
+  if (isLoading) return <LoadingPage />;
 
   return (
-    <>
-      <div className="mb-20 p-2">
-        <div className="flex flex-col gap-4 mt-4">
-          <Block
-            nested
-            inset
-            strong
-            className="shadow-[0px_0px_5px_rgba(0,0,0,0.10)]"
-          >
-            <p className="font-medium text-slate-600">Production History</p>
-          </Block>
-          <Block
-            nested
-            inset
-            strong
-            className="
-              rounded-2xl
-              shadow-[0px_0px_5px_rgba(0,0,0,0.10)]
-            "
-          >
-            <p className="ml-1 text-sm font-medium text-slate-600">
-              Filter by date
-            </p>
+    <div className="min-h-screen bg-slate-50 px-1 pb-24">
+      {/* Date Filter */}
+      <Block inset strong className="shadow-lg rounded-3xl bg-white mb-4">
+        <h1 className="text-sm font-bold text-slate-800 mb-2">
+          Production History
+        </h1>
 
-            <div className="flex gap-3 my-2">
-              <input
-                type="date"
-                className="
-                  w-full
-                  px-3 py-2
-                  rounded-xl
-
-                  border border-slate-300
-                  text-slate-700
-                  text-sm
-
-                  focus:outline-none
-                  focus:border-blue-500
-                  focus:ring-2
-                  focus:ring-blue-500/20
-                "
-              />
-
-              <input
-                type="date"
-                className="
-                  w-full
-                  px-3 py-2
-                  rounded-xl
-                  border border-slate-300
-                  text-slate-700
-                  text-sm
-
-                  focus:outline-none
-                  focus:border-blue-500
-                  focus:ring-2
-                  focus:ring-blue-500/20
-                "
-              />
-            </div>
-            <DialogButton
-              className="
-                bg-sky-800 
-                text-slate-100
-                  px-6
-                "
-            >
-              Filter
-            </DialogButton>
-          </Block>
+        <div className="flex items-center gap-2 mb-4">
+          <Calendar size={15} className="text-sky-600" />
+          <p className="text-sm font-semibold text-slate-700">Filter by Date</p>
         </div>
-        <hr className="mt-4 w-[92%] mx-auto border-slate-200/80" />
-        <List nested>
-          {productions?.map((prod) => (
-            <ListItem key={prod._id}>
-              <HistoryCard productionDetails={prod} />
-            </ListItem>
-          ))}
-        </List>
+
+        <div className="flex mb-4 justify-between">
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-slate-600 mb-1 ml-1">
+              From
+            </label>
+            <input
+              type="date"
+              className="p-2 rounded-xl border-2 border-slate-200 focus:border-sky-600 focus:outline-none transition-colors bg-slate-50 text-slate-700 text-sm"
+            />
+          </div>
+
+          <div className="flex-1">
+            <label className="block text-xs font-medium text-slate-600 mb-1 ml-1">
+              To
+            </label>
+            <input
+              type="date"
+              className="p-2 rounded-xl border-2 border-slate-200 focus:border-sky-600 focus:outline-none transition-colors bg-slate-50 text-slate-700 text-sm"
+            />
+          </div>
+        </div>
+
+        <Button
+          rounded
+          raised
+          className="w-full bg-sky-600 text-white h-12 font-semibold"
+        >
+          Apply Filter
+        </Button>
+      </Block>
+
+      {/* Production List */}
+      <div className="space-y-3">
+        {productions && productions.length > 0 ? (
+          productions.map((prod) => (
+            <HistoryCard key={prod._id} productionDetails={prod} />
+          ))
+        ) : (
+          <Block
+            inset
+            strong
+            className="shadow-lg rounded-3xl bg-white text-center"
+          >
+            <p className="text-slate-500">No production history found</p>
+          </Block>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

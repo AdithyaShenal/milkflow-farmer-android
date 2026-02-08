@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Dialog, DialogButton } from "konsta/react";
+import { Dialog, Button } from "konsta/react";
 import { Toast } from "@capacitor/toast";
+import { X } from "lucide-react";
 import useSubmitProd from "../hooks/useSubmitProd";
 import useFetchToday from "../hooks/usefetchToday";
 import UserDetailsHeader from "../components/HomePage/UserDetailsHeader";
@@ -13,8 +14,8 @@ import LoadingPage from "./LoadingPage";
 
 const schema = z.object({
   volume: z
-    .number({ message: "Route number is required" })
-    .int("Route number must be an integer")
+    .number({ message: "Volume is required" })
+    .int("Volume must be an integer")
     .gt(0, "Volume must be greater than 0"),
 });
 
@@ -32,12 +33,18 @@ const HomePage = () => {
 
   const { data, isLoading, isError, error } = useFetchToday();
 
-  const { register, handleSubmit } = useForm<SubmitionData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<SubmitionData>({
     resolver: zodResolver(schema),
   });
 
   const submitHandler = (data: SubmitionData) => {
     submitProd({ volume: data.volume });
+    reset();
   };
 
   if (isSubmitErr) {
@@ -48,14 +55,14 @@ const HomePage = () => {
 
   if (isError && !data) {
     Toast.show({
-      text: error.response?.data.message ?? "Failed to Submit Production",
+      text: error.response?.data.message ?? "Failed to Fetch Data",
     });
   }
 
-  if (isLoading) return <div>{<LoadingPage />}</div>;
+  if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="p-2 mb-10">
+    <div className="min-h-screen bg-slate-50 px-1 pb-24">
       {/* Header */}
       <UserDetailsHeader />
 
@@ -71,51 +78,79 @@ const HomePage = () => {
         <ProductionControl productionDetails={data.production} />
       )}
 
-      {/* Dialog */}
+      {/* Submit Production Dialog */}
       <Dialog
-        className="w-full"
+        className="p-0"
         opened={dialogOpened}
         onBackdropClick={() => setDialogOpened(false)}
-        title="Submit Milk Production"
-        content={
-          <form
-            onSubmit={handleSubmit(submitHandler)}
-            className="flex flex-col gap-4"
-          >
-            <label htmlFor="milkAmount" className="text-gray-700">
+      >
+        <form
+          onSubmit={handleSubmit(submitHandler)}
+          className="bg-white rounded-3xl h-full"
+        >
+          {/* Dialog Header */}
+          <div className="flex items-center justify-between border-b p-6 border-slate-200">
+            <h2 className="text-sm font-semibold text-slate-800">
+              Submit Milk Production
+            </h2>
+            <button
+              type="button"
+              onClick={() => setDialogOpened(false)}
+              className="p-1 hover:bg-slate-100 rounded-lg transition-colors"
+            >
+              <X size={18} className="text-slate-600" />
+            </button>
+          </div>
+
+          {/* Dialog Content */}
+          <div className="p-6">
+            <label
+              htmlFor="milkAmount"
+              className="block mb-2 text-sm font-semibold text-slate-700"
+            >
               How Many Liters?
             </label>
             <input
               {...register("volume", { valueAsNumber: true })}
               id="milkAmount"
               type="number"
-              className="w-full px-3 py-2 rounded-xl border-2 border-sky-800/15"
-              placeholder="Enter litres"
+              inputMode="decimal"
+              className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 focus:border-sky-600 focus:outline-none transition-colors bg-slate-50 text-slate-800 placeholder:text-slate-400"
+              placeholder="Enter liters"
             />
+            {errors.volume && (
+              <p className="text-xs text-red-500 mt-1">
+                {errors.volume.message}
+              </p>
+            )}
+          </div>
 
-            <div className="flex justify-end gap-2">
-              <DialogButton
-                type="reset"
-                onClick={() => {
-                  setDialogOpened(false);
-                }}
-              >
-                Cancel
-              </DialogButton>
-              <DialogButton
-                className="bg-sky-800"
-                type="submit"
-                strong
-                onClick={() => {
-                  setDialogOpened(false);
-                }}
-              >
-                Submit
-              </DialogButton>
-            </div>
-          </form>
-        }
-      />
+          {/* Dialog Actions */}
+          <div className="p-6 pt-0 flex gap-3">
+            <Button
+              type="button"
+              rounded
+              outline
+              className="flex-1 border-2 border-slate-300 text-slate-700 h-12 font-semibold"
+              onClick={() => {
+                setDialogOpened(false);
+                reset();
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              rounded
+              raised
+              className="flex-1 bg-sky-600 text-white h-12 font-semibold"
+              onClick={() => setDialogOpened(false)}
+            >
+              Submit
+            </Button>
+          </div>
+        </form>
+      </Dialog>
     </div>
   );
 };

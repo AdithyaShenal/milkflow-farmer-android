@@ -4,7 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import PrivateLayout from "../layouts/PrivateLayout";
 import HomePage from "../pages/HomePage";
 import HistoryPage from "../pages/HistoryPage";
-import HelpPage from "../pages/HelpPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +13,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
       },
     ],
   },
@@ -26,10 +30,6 @@ const router = createBrowserRouter([
       {
         path: "/history",
         element: <HistoryPage />,
-      },
-      {
-        path: "/helpPage",
-        element: <HelpPage />,
       },
     ],
   },
