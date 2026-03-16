@@ -2,7 +2,7 @@ import axios from "axios";
 import { Preferences } from "@capacitor/preferences";
 import router from "../routes/routes";
 
-const baseURL = "http://milkflow.adithyashenal.me/api";
+const baseURL = "https://milkflow.adithyashenal.me/api";
 // const baseURL = "http://localhost:3050/api";
 
 export const api = axios.create({

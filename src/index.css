@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "konsta/react/theme.css";
+
 /* Typically in your index.css or equivalent */
 html,
 body,

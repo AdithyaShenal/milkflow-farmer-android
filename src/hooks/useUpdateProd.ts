@@ -19,11 +19,14 @@ const useUpdateProd = () => {
   const queryClient = useQueryClient();
 
   return useMutation<Production, AxiosError<ApiError>, Payload>({
-    mutationFn: ({ productionId, volume }) =>
-      api.put(`/production/${productionId}`, { volume }),
+    mutationFn: async ({ productionId, volume }) => {
+      const response = await api.put(`/production/${productionId}`, { volume });
+      return response.data;
+    },
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["today", "production"] });
+      queryClient.refetchQueries({ queryKey: ["today", "production"] });
     },
   });
 };

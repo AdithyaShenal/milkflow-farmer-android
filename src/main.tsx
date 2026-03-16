@@ -5,6 +5,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { App } from "konsta/react";
 import router from "./routes/routes";
 import "./index.css";
+import "leaflet/dist/leaflet.css";
 
 export const queryClient = new QueryClient();
 
@@ -20,5 +21,5 @@ createRoot(document.getElementById("root")!).render(
         <RouterProvider router={router} />
       </QueryClientProvider>
     </App>
-  </StrictMode>
+  </StrictMode>,
 );
